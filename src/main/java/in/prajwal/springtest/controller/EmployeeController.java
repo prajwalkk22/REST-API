@@ -37,23 +37,24 @@ public class EmployeeController {
     }
     //localhost:8080/employees/12
     @GetMapping("/employees/{id}")
-    public String getEmployee(@PathVariable("id") Long id){
-        return "Fetching the employee details for the id " + id;
+    public Employee getEmployee(@PathVariable("id") Long id){
+       return eService.getSingleEmployee(id);
     }
 
     //localhost:8080/emploees?id=34
     @DeleteMapping("/employees")
-    public String deleteEmployee(@RequestParam("id") long id){
-        return "Deleting the employee id " + id;
+    public void deleteEmployee(@RequestParam("id") long id){
+        eService.deleteEmployee(id);
     }
 
     @PostMapping("/employees")
-    public String saveEmployee(@RequestBody Employee employee){
-            return "saving the employee details to the database " + employee;
+    public Employee saveEmployee(@RequestBody Employee employee){
+        return eService.saveEmployee(employee);
     }
 
     @PutMapping("/employees/{id}")
     public Employee updateEmployee(@PathVariable Long id,@RequestBody Employee employee){
-        return employee;
+        employee.setId(id);
+        return eService.updateEmployee(employee);
     }
 }
