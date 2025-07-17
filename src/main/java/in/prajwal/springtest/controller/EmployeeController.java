@@ -4,9 +4,13 @@ import in.prajwal.springtest.service.EmployeeService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+import static org.springframework.http.HttpStatus.OK;
 
 //@Controller
 @RestController //@Controller + @ResponseBody
@@ -33,8 +37,8 @@ public class EmployeeController {
 
 //    @RequestMapping(value = "/employees",method = RequestMethod.GET)
     @GetMapping("/employees")
-    public List<Employee> getEmployees(){
-        return eService.getEmployees();
+    public ResponseEntity<List<Employee>> getEmployees(){
+        return new ResponseEntity<List<Employee>>(eService.getEmployees(), HttpStatus.OK);
     }
     //localhost:8080/employees/12
     @GetMapping("/employees/{id}")
@@ -49,8 +53,8 @@ public class EmployeeController {
     }
 
     @PostMapping("/employees")
-    public Employee saveEmployee(@Valid @RequestBody Employee employee){
-        return eService.saveEmployee(employee);
+    public ResponseEntity<Employee> saveEmployee(@Valid @RequestBody Employee employee){
+        return new ResponseEntity<>(eService.saveEmployee(employee),HttpStatus.CREATED);
     }
 
     @PutMapping("/employees/{id}")

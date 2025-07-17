@@ -1,16 +1,13 @@
 package in.prajwal.springtest.model;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
-import lombok.NonNull;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-
 import java.util.Date;
 
 @Setter
@@ -27,7 +24,7 @@ public class Employee {
     @Column(name="name")
     //@JsonProperty("fullName") alias
 
-    @NotNull
+    @NotEmpty(message = "Name should not be null")
     private String name;
 
     //@JsonIgnore//to avoid in http
@@ -38,10 +35,11 @@ public class Employee {
     //private String location;
 
     @Column(name="email")
+    @Email
     private String email;
 
     @Column(name="department")
-    @NotNull
+    @NotNull(message = "department should not be null")
     private String department;
 
     @CreationTimestamp
@@ -52,3 +50,5 @@ public class Employee {
     @Column(name="updated_At")
     private Date updateAt;
 }
+
+//@NotBlank to avoid space inside name, @NotEmpty to avoid empty name,@NotNull to avoid null value
