@@ -42,5 +42,21 @@ public class EmployeeServiceimpl implements EmployeeService {
     public Employee updateEmployee(Employee employee){
         return eRepository.save(employee);
     }
+
+    @Override
+    public List<Employee> getEmployeesByName(String name){
+        return eRepository.findByName(name);
+    }
+
+    @Override
+    public List<Employee> getEmployeesByNameAndDepartment(String name,String department){
+        return eRepository.findByNameAndDepartment(name,department);
+    }
+
+    @Override
+     public  List<Employee> getEmployeesByKeyword(String name){
+        return eRepository.findByNameContaining(name);
+    }
+
 }
 

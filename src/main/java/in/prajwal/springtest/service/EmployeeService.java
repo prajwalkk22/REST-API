@@ -16,4 +16,10 @@ public interface EmployeeService {
 
     Employee updateEmployee(Employee employee);
 
+    List<Employee> getEmployeesByName(String name);
+
+    List<Employee> getEmployeesByNameAndDepartment(String name,String department);
+
+    List<Employee> getEmployeesByKeyword(String keyword);
+
 }

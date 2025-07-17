@@ -62,4 +62,23 @@ public class EmployeeController {
         employee.setId(id);
         return eService.updateEmployee(employee);
     }
+
+    @GetMapping("/employees/filterByName")
+    public ResponseEntity<List<Employee>> getEmployeesByName(@RequestParam String name){
+        return new ResponseEntity<List<Employee>>(eService.getEmployeesByName(name),HttpStatus.OK);
+    }
+
+    @GetMapping("/employees/filterByNameAndDepartment")
+    public ResponseEntity<List<Employee>> getEmployeesByName(@RequestParam String name,@RequestParam String department){
+        return new ResponseEntity<List<Employee>>(eService.getEmployeesByNameAndDepartment(name,department),HttpStatus.OK);
+    }
+
+    @GetMapping("/employees/filterByKeyword")
+    public ResponseEntity<List<Employee>> getEmployeesByKeyword(@RequestParam String name){
+        return new ResponseEntity<List<Employee>>(eService.getEmployeesByKeyword(name),HttpStatus.OK);
+    }
+
+
+
+
 }
