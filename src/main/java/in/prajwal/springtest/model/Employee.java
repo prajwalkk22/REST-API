@@ -6,6 +6,10 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import java.util.Date;
 
 @Setter
 @Getter
@@ -36,4 +40,12 @@ public class Employee {
 
     @Column(name="department")
     private String department;
+
+    @CreationTimestamp
+    @Column(name="create_At",nullable=false,updatable = false)
+    private Date createdAt;
+
+    @UpdateTimestamp
+    @Column(name="updated_At")
+    private Date updateAt;
 }
