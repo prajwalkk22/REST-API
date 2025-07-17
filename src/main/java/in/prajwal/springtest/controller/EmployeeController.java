@@ -1,6 +1,7 @@
 package in.prajwal.springtest.controller;
 import in.prajwal.springtest.model.Employee;
 import in.prajwal.springtest.service.EmployeeService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
@@ -48,7 +49,7 @@ public class EmployeeController {
     }
 
     @PostMapping("/employees")
-    public Employee saveEmployee(@RequestBody Employee employee){
+    public Employee saveEmployee(@Valid @RequestBody Employee employee){
         return eService.saveEmployee(employee);
     }
 

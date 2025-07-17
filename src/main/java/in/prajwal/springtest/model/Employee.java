@@ -3,7 +3,9 @@ package in.prajwal.springtest.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
@@ -17,7 +19,7 @@ import java.util.Date;
 @Entity
 @Table(name="tbl_employee")
 public class Employee {
-
+//no need of column notaion if column name is same as field name
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="id")
@@ -25,12 +27,12 @@ public class Employee {
     @Column(name="name")
     //@JsonProperty("fullName") alias
 
-
+    @NotNull
     private String name;
 
     //@JsonIgnore//to avoid in http
     @Column(name="age")
-    private Long age;
+    private Long age = 0L;
 
    //@Column(name="location")
     //private String location;
@@ -39,6 +41,7 @@ public class Employee {
     private String email;
 
     @Column(name="department")
+    @NotNull
     private String department;
 
     @CreationTimestamp
