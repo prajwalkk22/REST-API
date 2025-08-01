@@ -6,7 +6,8 @@ import java.util.List;
 
 public interface EmployeeService {
 
-    List<Employee> getEmployees();
+    List<Employee> getEmployees(int pageNumber, int pageSize, String sortField, String sortDirection);
+
 
     Employee saveEmployee(Employee employee);
 

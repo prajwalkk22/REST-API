@@ -3,6 +3,9 @@ package in.prajwal.springtest.service;
 import in.prajwal.springtest.model.Employee;
 import in.prajwal.springtest.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 
@@ -16,9 +19,15 @@ public class EmployeeServiceimpl implements EmployeeService {
     private EmployeeRepository eRepository;
 
     @Override
-    public List<Employee> getEmployees() {
-       return eRepository.findAll();
+    public List<Employee> getEmployees(int pageNumber, int pageSize, String sortField, String sortDirection) {
+        Sort sort = sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name())
+                ? Sort.by(sortField).ascending()
+                : Sort.by(sortField).descending();
+
+        Pageable pageable = PageRequest.of(pageNumber, pageSize, sort);
+        return eRepository.findAll(pageable).getContent();
     }
+
     @Override
     public Employee saveEmployee(Employee employee){
       return eRepository.save(employee);

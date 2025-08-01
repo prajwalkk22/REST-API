@@ -36,10 +36,17 @@ public class EmployeeController {
     //localhost:8000/employees
 
 //    @RequestMapping(value = "/employees",method = RequestMethod.GET)
-    @GetMapping("/employees")
-    public ResponseEntity<List<Employee>> getEmployees(){
-        return new ResponseEntity<List<Employee>>(eService.getEmployees(), HttpStatus.OK);
-    }
+@GetMapping("/employees")
+public ResponseEntity<List<Employee>> getEmployees(
+        @RequestParam Integer pageNumber,
+        @RequestParam Integer pageSize,
+        @RequestParam(defaultValue = "id") String sortField,
+        @RequestParam(defaultValue = "asc") String sortDirection) {
+
+    List<Employee> employees = eService.getEmployees(pageNumber, pageSize, sortField, sortDirection);
+    return new ResponseEntity<>(employees, HttpStatus.OK);
+}
+
     //localhost:8080/employees/12
     @GetMapping("/employees/{id}")
     public Employee getEmployee(@PathVariable("id") Long id){
